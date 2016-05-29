@@ -1,0 +1,27 @@
+.home {
+    $home-base-color : #444;
+    ion-item{
+        .time{
+            color: $home-base-color;
+            font-size:$font-size-base * 1.2;
+        }
+        .empty{
+            color:#999;
+        }
+        h3{
+            padding: 10px 10px;
+            font-size:$font-size-base * 1.2;
+            font-weight:bold;
+            color:$home-base-color;
+            .title{
+                padding-left:10px;
+                padding-right:10px;
+            }
+            .date{
+                font-size:$font-size-base * 1.25;
+                color:$home-base-color;
+                padding-right:10px;
+            }
+        }
+    }
+}

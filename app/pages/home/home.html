@@ -1,0 +1,88 @@
+<ion-navbar *navbar>
+  <ion-buttons start>
+    <button>
+      <ion-icon name="information"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-buttons end>
+    <button (click)="onAddItem()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content class="home">
+  <ion-card>
+    <ion-list *ngIf="task.hasItem">
+      <ion-item-sliding *ngFor="let item of list">
+        <ion-item>
+          <h3>
+            <span class="date">{{item.task_date}}</span>
+            :
+            <span class="title">{{item.title}}</span>
+            <span class="empty" *ngIf="!item.title">未入力</span>
+          </h3>
+          <p>
+            <ion-row center>
+              <ion-col width-20>想定時間</ion-col>
+              <ion-col width-20>
+                <span class="time">{{item.disp_use_time}}</span>
+                <span class="time empty" *ngIf="!item.disp_use_time">未入力</span>
+              </ion-col>
+              <ion-col width-20>実績時間</ion-col>
+              <ion-col width-20>
+                <span class="time">{{item.count_second}}</span>
+                <span class="time empty" *ngIf="!item.count_second">00:00:00</span>
+              </ion-col>
+            </ion-row>
+          </p>
+          <p>
+            <ion-row center>
+              <ion-col width-33>
+                <button *ngIf="item.enableTaskStart" (click)="onTaskStart(item)">
+                  <ion-icon name="stopwatch"></ion-icon>
+                  開始
+                </button>
+                <button *ngIf="!item.enableTaskStart" disabled outline>
+                  <ion-icon name="stopwatch"></ion-icon>
+                  開始
+                </button>
+              </ion-col>
+              <ion-col width-33>
+                <button *ngIf="item.enableTaskStop" (click)="onTaskStop(item)" danger>
+                  <ion-icon name="square"></ion-icon>
+                  中断
+                </button>
+                <button *ngIf="!item.enableTaskStop" danger disabled outline>
+                  <ion-icon name="square"></ion-icon>
+                  中断
+                </button>
+              </ion-col>
+              <ion-col width-33>
+                <button *ngIf="item.enableTaskEnd" (click)="onTaskEnd(item)" dark>
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  完了
+                </button>
+                <button *ngIf="!item.enableTaskEnd"dark disabled outline>
+                  <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  完了
+                </button>
+              </ion-col>
+            </ion-row>
+          </p>
+        </ion-item>
+        <ion-item-options>
+          <button (click)="onRemoveItem(item)" danger>
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+          <button (click)="onEditItem(item)">
+            <ion-icon name="open"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-card-content *ngIf="!task.hasItem">
+      <p>タスクは未登録です</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

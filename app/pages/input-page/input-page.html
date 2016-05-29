@@ -1,0 +1,67 @@
+<ion-toolbar>
+  <ion-buttons>
+      <button (click)="onClose()">
+      <ion-icon name="arrow-back"></ion-icon>
+      </button>
+  </ion-buttons>
+  <ion-title>タスク入力</ion-title>
+</ion-toolbar>
+<ion-content padding class="input-page">
+
+    <!-- <ion-card-header> -->
+      <h2>タスク名</h2>
+      <ion-input type="text" [(ngModel)]="title" (keyup)="onKeyup()"></ion-input>
+    <!-- </ion-card-header> -->
+    <!-- <ion-card-content> -->
+    <ion-list>
+      <ion-item>
+        <ion-label>日付</ion-label>
+        <ion-datetime
+        displayFormat="YYYY/MM/DD"
+        pickerFormat="YYYY-MM-DD"
+        [(ngModel)]="task_date"
+        cancelText="キャンセル"
+        doneText="決定"
+        >{{task_date}}</ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>想定時間</ion-label>
+        <ion-datetime
+        displayFormat="HH:mm"
+        [(ngModel)]="use_time"
+        cancelText="キャンセル"
+        doneText="決定"
+        >{{disp_use_time}}
+        </ion-datetime>
+      </ion-item>
+      <ion-item class="input-memo">
+        <ion-label>メモ</ion-label>
+        <ion-textarea [(ngModel)]="memo_text"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!is_create">
+        <ion-label>状態</ion-label>
+        <ion-select [(ngModel)]="task_status">
+          <ion-option
+          *ngFor="let status of task_status_options"
+          value="{{status.value}}"
+          >{{status.label}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="!is_create">
+        <ion-label>実績時間</ion-label>
+        <ion-datetime
+        displayFormat="HH:mm"
+        [(ngModel)]="count_second"
+        cancelText="キャンセル"
+        doneText="決定"
+        >{{use_time}}
+        </ion-datetime>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <button (click)="onSave()" *ngIf="save_button_status" full>{{save_button_label}}</button>
+      <button (click)="onSave()" *ngIf="!save_button_status" full disabled>{{save_button_label}}</button>
+    </ion-item>
+    <!-- </ion-card-content> -->
+  <!-- </ion-card> -->
+</ion-content>
